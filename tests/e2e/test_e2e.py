@@ -71,3 +71,19 @@ def test_calculator_divide_by_zero(page, fastapi_server):
     # "Error: Cannot divide by zero!". This verifies that the application handles division by zero
     # gracefully and displays the correct error message to the user.
     assert page.inner_text('#result') == 'Error: Cannot divide by zero!'
+
+@pytest.mark.e2e
+def test_h2_tag(page, fastapi_server):
+    """
+    Test that the homepage displays the correct text in the <h2> tag.
+    
+    This test verifies that the secondary heading (`<h2>`) on the homepage
+    correctly displays "The Magical Devops Calculator Project". This ensures that
+    the calculator section is properly introduced and the correct content is rendered.
+    """
+    # Navigate the browser to the homepage URL of the FastAPI application.
+    page.goto('http://localhost:8000')
+    
+    # Use an assertion to check that the text within the first <h2> tag is exactly "The Magical Devops Calculator Project".
+    # If the text does not match, the test will fail.
+    assert page.inner_text('h2') == 'The Magical Devops Calculator Project'
